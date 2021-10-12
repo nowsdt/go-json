@@ -16,7 +16,7 @@ func EmptyJsonObject() *JsonObject {
 	}
 }
 
-func NewJsonObject(jsonStr string) (*JsonObject, error) {
+func NewObject(jsonStr string) (*JsonObject, error) {
 	var err error
 	data := make(map[string]interface{}, 8)
 	err = json.Unmarshal([]byte(jsonStr), &data)
@@ -26,8 +26,21 @@ func NewJsonObject(jsonStr string) (*JsonObject, error) {
 	return &JsonObject{data}, nil
 }
 
-func newJsonArray() *JsonArray {
+func EmptyJsonArray() *JsonArray {
 	return &JsonArray{
 		make([]map[string]interface{}, 8),
 	}
+}
+func NewJsonArray(jsonStr string) (*JsonArray, error) {
+	var err error
+	data := make(map[string]interface{}, 8)
+	err = json.Unmarshal([]byte(jsonStr), &data)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &JsonArray{
+		make([]map[string]interface{}, 8),
+	}, nil
 }
